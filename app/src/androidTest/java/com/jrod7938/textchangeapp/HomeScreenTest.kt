@@ -29,12 +29,48 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.jrod7938.textchangeapp.screens.createAccount
+package com.jrod7938.textchangeapp
 
-import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
+import androidx.compose.ui.test.assertHasClickAction
+import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithText
+import androidx.navigation.compose.rememberNavController
+import com.jrod7938.textchangeapp.screens.home.HomeScreen
+import org.junit.Rule
+import org.junit.Test
 
-@Composable
-fun CreateAccountScreen(navController: NavController){
+/**
+ * This class is used to test the home screen
+ *
+ * @property rule is used to create a compose rule
+ */
+class HomeScreenTest {
 
+    @get:Rule
+    val rule = createComposeRule()
+
+    /**
+     * This test is to check if the home screen is displayed correctly
+     */
+    @Test
+    fun homeScreenDisplayTest() {
+        rule.setContent {
+            val navController = rememberNavController()
+            HomeScreen(navController = navController)
+        }
+
+        rule.onNodeWithText("Get Started:")
+            .assertExists()
+
+        rule.onNodeWithText("Find A Book")
+            .assertExists()
+            .assertHasClickAction()
+
+        rule.onNodeWithText("Sell A Book")
+            .assertExists()
+            .assertHasClickAction()
+
+        rule.onNodeWithText("Categories:")
+            .assertExists()
+    }
 }

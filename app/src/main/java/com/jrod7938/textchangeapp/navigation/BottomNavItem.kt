@@ -29,46 +29,51 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.jrod7938.textchangeapp
+package com.jrod7938.textchangeapp.navigation
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import com.jrod7938.textchangeapp.navigation.AppNavigation
-import com.jrod7938.textchangeapp.ui.theme.TexTchangeAppTheme
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.outlined.Add
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Search
+import androidx.compose.ui.graphics.vector.ImageVector
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            TexTchangeAppTheme {
-                TxTchangeApp()
-            }
-        }
+/**
+ * A data class representing a bottom navigation item.
+ *
+ * @param title The title of the item.
+ * @param selectedIcon The icon to display when the item is selected.
+ * @param unselectedIcon The icon to display when the item is not selected.
+ * @param route The route to navigate to when the item is selected.
+ */
+data class BottomNavItem(
+    val title: String,
+    val selectedIcon: ImageVector,
+    val unselectedIcon: ImageVector,
+    val route: String,
+) {
+
+
+    companion object {
+        val Home = BottomNavItem(
+            title = "Home",
+            selectedIcon = Icons.Filled.Home,
+            unselectedIcon = Icons.Outlined.Home,
+            route = AppScreens.HomeScreen.name
+        )
+        val Sell = BottomNavItem(
+            title = "Sell",
+            selectedIcon = Icons.Filled.AddCircle,
+            unselectedIcon = Icons.Outlined.Add,
+            route = AppScreens.SellBookScreen.name
+        )
+        val Search = BottomNavItem(
+            title = "Search",
+            selectedIcon = Icons.Filled.Search,
+            unselectedIcon = Icons.Outlined.Search,
+            route = AppScreens.SearchScreen.name
+        )
     }
 }
-
-@Composable
-fun TxTchangeApp(){
-    // A surface container using the 'background' color from the theme
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            AppNavigation()
-        }
-    }
-}
-
