@@ -136,7 +136,7 @@ fun BookInfoScreen(
                         onClick = {
                             book!!.let { book ->
                                 val emailIntent = viewModel.prepareInterestEmailIntent(book)
-                                emailIntent?.let { intent ->
+                                emailIntent.let {
                                     context.startActivity(emailIntent)
 
                                 }
@@ -145,7 +145,6 @@ fun BookInfoScreen(
                     ) {
                         Text(text = "Send Email")
                     }
-
                     Button(
                         modifier = Modifier
                             .fillMaxWidth()
